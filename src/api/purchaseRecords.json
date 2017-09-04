@@ -1,0 +1,45 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "totalCost": 10.00,
+      "status": "open",
+      "items" : [
+        {
+          "title": "Hamburger",
+          "unitCost": 4.50,
+          "quantity": 1
+        },
+        {
+          "title": "Bottled Water",
+          "unitCost": "1",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "totalCost": 5.50,
+      "status": "close",
+      "items" : [
+        {
+          "title": "Cheeseburger",
+          "unitCost": 5.50,
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "totalCost": 4.25,
+      "status": "open",
+      "items" : [
+        {
+          "title": "Veggie Burger",
+          "unitCost": 4.25,
+          "quantity": 1
+        }
+      ]
+    }
+  ]
+}

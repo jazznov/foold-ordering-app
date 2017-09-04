@@ -1,0 +1,19 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "name": "Hamburger",
+      "unitCost": 4.50
+    },
+    {
+      "id": 2,
+      "name": "Cheeseburger",
+      "unitCost": 5.50
+    },
+    {
+      "id": 3,
+      "name": "Veggie Burger",
+      "unitCost": 4.25
+    }
+  ]
+}
