@@ -3,8 +3,10 @@ import { connect } from 'react-redux';
 import Tabs from '../components/Tabs.js';
 import PurchaseMenu from '../components/PurchaseMenu.js';
 import {GetPurchaseRecord} from '../api/serverHelpers.js';
+import {alertOnOpenRecordsAmount, getOpenRecords} from '../utils/utils';
 import '../styles/App.css';
 import cloneDeep from 'lodash/cloneDeep';
+import find from 'lodash/find';
 import {handleCreatePurchaseRecord} from '../actions/actions';
 
 class App extends Component {
@@ -29,7 +31,6 @@ class App extends Component {
 
 		// TODO Move out of local state
 		this.setState({
-			purchaseRecord:         newPurchaseRecord,
 			activePurchaseRecordId: newPurchaseRecord.id
 		});
 	}
@@ -45,14 +46,18 @@ class App extends Component {
 		})
 			.then((purchaseRecord) =>{
 				this.setState({
-					purchaseRecord:         purchaseRecord,
 					// storing updated purchase order tab id
 					activePurchaseRecordId: itemClicked.id
 				});
 			});
 	}
+	componentDidUpdate() {
+		// Figured this would be an easy way/good time to show the alert without blocking any other running JS.
+		alertOnOpenRecordsAmount({records: getOpenRecords(this.props.purchaseRecords), amount: 4});
+	}
 
 	render(){
+		const activePurchaseRecord = find(this.props.purchaseRecords, ['id', this.state.activePurchaseRecordId]);
 		return (
 			<div>
 				<main className="main-content">
@@ -73,7 +78,7 @@ class App extends Component {
 							}
 						</div>
 
-						{this.state.purchaseRecord ? <PurchaseMenu purchaseRecord={this.state.purchaseRecord} foodMenuItems={this.props.foodMenuItems}/>
+						{this.state.activePurchaseRecordId ? <PurchaseMenu purchaseRecord={activePurchaseRecord} foodMenuItems={this.props.foodMenuItems}/>
 							: <div>
 								Click an open order to view or click new Order
 							</div>}
