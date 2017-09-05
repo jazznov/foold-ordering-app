@@ -22,12 +22,13 @@ class PurchaseMenu extends Component {
 			let quantity = (matchedPurchasedItem && matchedPurchasedItem.quantity) ? matchedPurchasedItem.quantity : 0;
 			return (
 				<li key={index}>
-					<h5>{item.title}</h5>
-					<ul>
+					<ul className='list-unstyled list-inline'>
+						<li><h5>{item.title}</h5></li>
 						{this.props.purchaseRecord.status === 'new' || this.props.purchaseRecord.status === 'open' ?
-							<QuantityController onQuantityChange={this.props.onQuantityChange} {...item} quantity={quantity} parentRecordId={this.props.purchaseRecord.id}/>
+							<li>
+								<QuantityController onQuantityChange={this.props.onQuantityChange} {...item} quantity={quantity} parentRecordId={this.props.purchaseRecord.id}/>
+							</li>
 							: null}
-
 						<li>Unit Cost: {formatToDollars(item.unitCost)}</li>
 					</ul>
 				</li>
@@ -45,7 +46,7 @@ class PurchaseMenu extends Component {
 					<h4>Purchase Record ID: {this.props.purchaseRecord.id}</h4>
 					<p>Status: {this.props.purchaseRecord.status.toUpperCase()}</p>
 					<p>Total Cost: {totalConst}</p>
-					<ul>
+					<ul className='list-unstyled'>
 						{this.showFoodMenuItems()}
 					</ul>
 
