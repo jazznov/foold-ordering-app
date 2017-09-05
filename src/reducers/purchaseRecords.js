@@ -1,4 +1,5 @@
 import * as actionTypes from '../constants/actionTypes';
+import {addTotals} from '../utils/utils';
 import remove from 'lodash/remove';
 import find from 'lodash/find';
 
@@ -13,6 +14,7 @@ const purchaseRecord = (state = {}, action) =>{
 			}
 			return action.payload;
 		case actionTypes.CHANGE_PURCHASE_ORDER_ITEM_QUANTITY:
+			/* I don't like how procedural this is, would refactor */
 			if(state.id !== action.payload.id){
 				return state;
 			}
@@ -37,7 +39,8 @@ const purchaseRecord = (state = {}, action) =>{
 			}
 			return {
 				...state,
-				items: newItems
+				items: newItems,
+				totalCost: addTotals({items:newItems, key: 'unitCost'})
 			};
 		case actionTypes.CLOSE_PURCHASE_RECORD:
 			if(state.id !== action.payload.id){

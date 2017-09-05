@@ -33,3 +33,13 @@ export const alertOnOpenRecordsAmount = ({records, amount}) => {
 		alert('4 orders are now open');
 	}
 };
+
+
+/*
+* Thank you: https://stackoverflow.com/questions/39828497/sum-of-string-values-on-array-object#answer-39828726
+* */
+export const addTotals = ({items, key}) => {
+	return items.reduce(function(total, item) {
+		return total + parseFloat(item[key]);
+	}, 0);
+};
