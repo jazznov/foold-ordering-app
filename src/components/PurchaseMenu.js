@@ -27,7 +27,7 @@ export default class OrderMenu extends Component {
 							<QuantityController quantity={itemQuantity} id={item.id}/>
 							: null}
 
-						<li>Unit Cost: {formatToDollars(this.props.purchaseRecord.totalCost)}</li>
+						<li>Unit Cost: {formatToDollars(item.unitCost)}</li>
 					</ul>
 				</li>
 			);
