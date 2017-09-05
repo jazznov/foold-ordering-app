@@ -1,5 +1,6 @@
 import isNumber from 'lodash/isNumber';
 import find from 'lodash/find';
+import filter from 'lodash/filter';
 
 
 export const formatToDollars = (value = console.error('Value undefined passed to formatToDollars')) =>{
@@ -12,9 +13,8 @@ export const formatToDollars = (value = console.error('Value undefined passed to
 	switch(isNumber(value)){
 		case true:
 			return format(value);
-			break;
 		case false:
-			return format(parseInt(value));
+			return format(parseInt(value, 10));
 	}
 };
 
@@ -22,4 +22,8 @@ export const matchMenuItemsToPurchaseItems = ({foodMenuItem, purchaseRecordItems
 	return find(purchaseRecordItems, (recordItem) =>{
 		return recordItem.id === foodMenuItem.id
 	});
+};
+
+export const getOpenRecords = (records) => {
+	return filter(records, {'status': 'open'})
 };
