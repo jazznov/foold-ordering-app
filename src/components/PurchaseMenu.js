@@ -14,7 +14,7 @@ class PurchaseMenu extends Component {
 				foodMenuItem:        item,
 				purchaseRecordItems: purchaseRecords.items
 			});
-			let quantity = (matchedPurchasedItem && matchedPurchasedItem.quantity) ? matchedPurchasedItem.quantity : 0;
+			let quantity = (matchedPurchasedItem && matchedPurchasedItem.quantity) ? Number(matchedPurchasedItem.quantity) : 0;
 			return (
 				<li key={index}>
 					<ul className='list-unstyled list-inline'>
