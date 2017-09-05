@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 const QuantityController = ({id, unitCost, quantity, onQuantityChange}) => {
 
 	return (
-		<input name={id} value={quantity} onChange={(e) => onQuantityChange({id, unitCost, quantity: e.target.value})}  type='number' step='1' min='0' />
+		<input id={id} name={id} value={quantity} onChange={(e) => onQuantityChange({id, unitCost, quantity: e.target.value})}  type='number' step='1' min='0' className='form-control' aria-describedby={`input-${id}-describedby`}/>
 	)
 };
 

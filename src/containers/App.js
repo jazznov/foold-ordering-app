@@ -63,7 +63,7 @@ class App extends Component {
 				<main className="main-content">
 					<div className="page-heading">
 						<h1>Food Order System</h1>
-						<button type='button' onClick={this.handleNewNewRecordClicked}>New Order</button>
+						<button className='btn btn-primary' type='button' onClick={this.handleNewNewRecordClicked}>New Order</button>
 					</div>
 
 					<div className="two-col">
@@ -80,7 +80,7 @@ class App extends Component {
 
 						{this.state.activePurchaseRecordId ? <PurchaseMenu purchaseRecord={activePurchaseRecord} foodMenuItems={this.props.foodMenuItems}/>
 							: <div>
-								Click an open order to view or click new Order
+								<p className='as-h3'>Click an open order to view or click new Order</p>
 							</div>}
 					</div>
 				</main>

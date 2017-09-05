@@ -17,15 +17,13 @@ class PurchaseMenu extends Component {
 			let quantity = (matchedPurchasedItem && matchedPurchasedItem.quantity) ? Number(matchedPurchasedItem.quantity) : 0;
 			return (
 				<li key={index}>
-					<ul className='list-unstyled list-inline'>
-						<li><h5>{item.title}</h5></li>
+					<div className='form-group spread-h-center-v'>
+						<label htmlFor={item.id} className='control-label'>{item.title}</label>
 						{this.props.purchaseRecord.status === 'new' || this.props.purchaseRecord.status === 'open' ?
-							<li>
-								<QuantityController onQuantityChange={this.props.onQuantityChange} {...item} quantity={quantity} parentRecordId={this.props.purchaseRecord.id}/>
-							</li>
+						<QuantityController onQuantityChange={this.props.onQuantityChange} {...item} quantity={quantity} parentRecordId={this.props.purchaseRecord.id}/>
 							: null}
-						<li>Unit Cost: {formatToDollars(item.unitCost)}</li>
-					</ul>
+						<p className='control-label' id={`input-${item.id}-describedby`}>Unit Cost: {formatToDollars(item.unitCost)}</p>
+					</div>
 				</li>
 			);
 		});
@@ -38,7 +36,7 @@ class PurchaseMenu extends Component {
 		return (
 			<section className="purchase-record-content">
 				<form>
-					<h4>Purchase Record ID: {this.props.purchaseRecord.id}</h4>
+					<h2 className='as-h3'>Purchase Record ID: {this.props.purchaseRecord.id}</h2>
 					<p>Status: {this.props.purchaseRecord.status.toUpperCase()}</p>
 					<p>Total Cost: {totalConst}</p>
 					<ul className='list-unstyled'>
@@ -46,14 +44,16 @@ class PurchaseMenu extends Component {
 					</ul>
 
 					{this.props.purchaseRecord.status === 'new' ?
-						<button onClick={this.props.onCreatePurchaseOrder} type='button'>Create Order</button>
-						: null}
+						<div className='btn-group spread-h-center-v'>
+							<button className='btn btn-primary' onClick={this.props.onCreatePurchaseOrder} type='button'>Create Order</button>
+						</div>
+							: null}
 
 					{this.props.purchaseRecord.status === 'open' ?
-						<div>
-							<button onClick={this.props.onSavePurchaseOrder} type='button'>Save Order</button>
-							<button onClick={this.props.onCancelOrderClicked} type='button'>Cancel Order</button>
-							<button onClick={this.props.onCloseOrderClicked} type='button'>Close Order</button>
+						<div className='btn-group spread-h-center-v'>
+							<button className='btn btn-primary' onClick={this.props.onSavePurchaseOrder} type='button'>Save Order</button>
+							<button className='btn btn-secondary' onClick={this.props.onCancelOrderClicked} type='button'>Cancel Order</button>
+							<button className='btn btn-secondary' onClick={this.props.onCloseOrderClicked} type='button'>Close Order</button>
 						</div>
 						: null}
 				</form>

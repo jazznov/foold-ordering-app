@@ -20,7 +20,7 @@ h2, h3 {
   height: 227px; }
   .page-heading h1 {
     text-align: center;
-    color: #707070;
+    color: #005183;
     font-size: 20px;
     width: 368px; }
 
@@ -65,3 +65,32 @@ h2, h3 {
     border-bottom: 1px solid #CCCCCC; }
     .tabs-vertical ul .tab-item button .sub-title {
       color: #333333; }
+
+.spread-h-center-v {
+  display: flex;
+  justify-content: space-between; }
+
+.btn-group .btn {
+  margin: 0 20px; }
+  .btn-group .btn:first-child {
+    margin-left: 0; }
+
+.purchase-record-content .form-group {
+  width: 40%; }
+
+.purchase-record-content .btn-group {
+  flex-direction: row-reverse;
+  width: 60%; }
+
+.purchase-record-content .btn-group .btn {
+  max-width: 110px; }
+
+.purchase-record-content .form-control[type=number] {
+  width: 80px; }
+
+.btn-primary {
+  background-color: #005183; }
+
+.btn-secondary {
+  background-color: #F5f5f5;
+  border: 1px solid #CCCCCC; }
