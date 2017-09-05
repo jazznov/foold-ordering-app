@@ -2,18 +2,13 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {formatToDollars, matchMenuItemsToPurchaseItems} from '../utils/utils';
 import QuantityController from './QuantityController';
-import {
-	handleQuantityChange,
-	handleSavePurchaseRecord,
-	handleCancelRecord,
-	handleCloseRecord
-} from '../actions/actions';
+import {handleQuantityChange,handleSavePurchaseRecord,handleCancelRecord,handleCloseRecord} from '../actions/actions';
 
 class PurchaseMenu extends Component {
 	// TODO Handle Read Only View?
 	showFoodMenuItems(){
 		const purchaseRecords = this.props.purchaseRecord;
-		const elements = this.props.foodMenuItems && this.props.foodMenuItems.map((item, index) =>{
+		const menuItems = this.props.foodMenuItems && this.props.foodMenuItems.map((item, index) =>{
 
 			const matchedPurchasedItem = matchMenuItemsToPurchaseItems({
 				foodMenuItem:        item,
@@ -35,7 +30,7 @@ class PurchaseMenu extends Component {
 			);
 		});
 
-		return (elements);
+		return (menuItems);
 	}
 
 	render(){
