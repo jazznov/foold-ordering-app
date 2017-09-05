@@ -14,6 +14,11 @@
       "id": 3,
       "title": "Veggie Burger",
       "unitCost": 4.25
+    },
+    {
+      "id": 4,
+      "title": "Bottled Water",
+      "unitCost": 1.00
     }
   ]
 }
