@@ -1,5 +1,6 @@
 import * as actionTypes from '../constants/actionTypes';
 import remove from 'lodash/remove';
+import find from 'lodash/find';
 
 const purchaseRecord = (state = {}, action) =>{
 	switch(action.type){
@@ -15,9 +16,14 @@ const purchaseRecord = (state = {}, action) =>{
 			if(state.id !== action.payload.id){
 				return state;
 			}
-			return {
-				...state,
-				items: state.items.map((item) =>{
+
+			let newItems = [];
+			// handle case where food item isn't in the record yet
+			if(find(state.items, ['id', action.payload.item.id]) === undefined) {
+				newItems = state.items.concat([action.payload.item]);
+				}
+			else {
+				newItems = state.items.map((item) =>{
 					if(item.id !== action.payload.item.id){
 						return item;
 					}
@@ -27,7 +33,11 @@ const purchaseRecord = (state = {}, action) =>{
 							quantity: action.payload.item.quantity
 						}
 					}
-				})
+				});
+			}
+			return {
+				...state,
+				items: newItems
 			};
 		case actionTypes.CLOSE_PURCHASE_RECORD:
 			if(state.id !== action.payload.id){
