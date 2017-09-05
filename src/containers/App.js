@@ -53,7 +53,7 @@ class App extends Component {
 	}
 	componentDidUpdate() {
 		// Figured this would be an easy way/good time to show the alert without blocking any other running JS.
-		alertOnOpenRecordsAmount({records: getOpenRecords(this.props.purchaseRecords), amount: 4});
+		alertOnOpenRecordsAmount({records: getOpenRecords(this.props.purchaseRecords), amount: 5});
 	}
 
 	render(){
