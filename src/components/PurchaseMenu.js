@@ -51,7 +51,7 @@ class PurchaseMenu extends Component {
 
 					{this.props.purchaseRecord.status === 'open' ?
 						<div className='btn-group spread-h-center-v'>
-							<button className='btn btn-primary' onClick={this.props.onSavePurchaseOrder} type='button'>Save Order</button>
+							<button className='btn btn-primary' onClick={this.props.onSavePurchaseOrder} type='button'>Update Order</button>
 							<button className='btn btn-secondary' onClick={this.props.onCancelOrderClicked} type='button'>Cancel Order</button>
 							<button className='btn btn-secondary' onClick={this.props.onCloseOrderClicked} type='button'>Close Order</button>
 						</div>
