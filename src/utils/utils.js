@@ -27,3 +27,9 @@ export const matchMenuItemsToPurchaseItems = ({foodMenuItem, purchaseRecordItems
 export const getOpenRecords = (records) => {
 	return filter(records, {'status': 'open'})
 };
+
+export const alertOnOpenRecordsAmount = ({records, amount}) => {
+	if(records.length === amount) {
+		alert('4 orders are now open');
+	}
+};
