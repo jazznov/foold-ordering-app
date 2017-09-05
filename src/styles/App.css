@@ -1,1 +1,67 @@
+/*
+App styles. Even though I'm pulling in Bootstrap's CSS, using only for tag defaults utility classes like text-hide and btn-link for time constraint, and avoiding Bootstrap grids to demonstrate that I know how to create a grid on my own.
+ Would normally either leverage much of it, including the grid system, or just import the parts I want via bootstrap-sass
+ */
+h2, h3 {
+  color: #005183; }
 
+.as-h4 {
+  font-size: 16px; }
+
+.main-content {
+  width: 90%;
+  margin: 0 auto; }
+
+.page-heading {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 227px; }
+  .page-heading h1 {
+    text-align: center;
+    color: #707070;
+    font-size: 20px;
+    width: 368px; }
+
+/* Main Content Area */
+.two-col {
+  display: flex; }
+  .two-col div:first-of-type {
+    padding-right: 10px; }
+  .two-col div:last-of-type {
+    padding-left: 10px; }
+
+.purchase-record-content {
+  width: 67%; }
+
+.purchase-record-tabs {
+  width: 33%; }
+
+.tabs ul {
+  padding-left: 0; }
+
+.tab-item {
+  display: flex;
+  list-style: none; }
+
+.tabs-vertical ul {
+  padding-left: 0;
+  display: flex;
+  flex-direction: column; }
+  .tabs-vertical ul .tab-item button {
+    padding: 10px 50px 10px 10px;
+    background-color: white; }
+    .tabs-vertical ul .tab-item button.active {
+      background-color: #F5f5f5; }
+  .tabs-vertical ul .tab-item button {
+    flex-direction: column;
+    justify-content: center;
+    display: flex;
+    padding: 10px 50px 10px 10px;
+    text-align: left;
+    width: 100%;
+    border-top: 1px solid #CCCCCC;
+    border-bottom: 1px solid #CCCCCC; }
+    .tabs-vertical ul .tab-item button .sub-title {
+      color: #333333; }

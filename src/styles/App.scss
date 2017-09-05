@@ -1,0 +1,103 @@
+/*
+App styles. Even though I'm pulling in Bootstrap's CSS, using only for tag defaults utility classes like text-hide and btn-link for time constraint, and avoiding Bootstrap grids to demonstrate that I know how to create a grid on my own.
+ Would normally either leverage much of it, including the grid system, or just import the parts I want via bootstrap-sass
+ */
+
+
+//Vars
+$dfblue: #005183;
+$lightGrey: #F5f5f5;
+$mediumGrey: #CCCCCC;
+$darkGrey: #707070;
+
+// Mixin used by Tabs
+@mixin button($dfBackgroundColor: $lightGrey, $activeBackgroundColor: white) {
+  button {
+    padding: 10px 50px 10px 10px;
+    background-color: $dfBackgroundColor;
+    &.active {
+      background-color: $activeBackgroundColor;
+    }
+  }
+}
+
+h2, h3 {
+  color: $dfblue;
+}
+
+.as-h4 {
+  font-size: 16px;
+}
+
+
+.main-content {
+  width: 90%;
+  margin: 0 auto;
+}
+
+.page-heading {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 227px;
+  h1  {
+    text-align: center;
+    color: $darkGrey;
+    font-size: 20px;
+    width: 368px;
+  }
+}
+
+
+
+/* Main Content Area */
+.two-col {
+  display: flex;
+  div:first-of-type {
+    padding-right: 10px;
+  }
+  div:last-of-type {
+    padding-left: 10px;
+  }
+}
+
+.purchase-record-content {
+  width: 67%;
+}
+
+.purchase-record-tabs {
+  width: 33%;
+}
+
+.tabs ul {
+  padding-left: 0;
+}
+
+.tab-item {
+  display: flex;
+  list-style: none;
+}
+
+// Purchase Order Tabs
+.tabs-vertical ul {
+  padding-left: 0;
+  display: flex;
+  flex-direction: column;
+  .tab-item {
+    @include button($dfBackgroundColor: white, $activeBackgroundColor: $lightGrey);
+    button {
+      flex-direction: column;
+      justify-content: center;
+      display: flex;
+      padding: 10px 50px 10px 10px;
+      text-align: left;
+      width: 100%;
+      border-top: 1px solid $mediumGrey;
+      border-bottom: 1px solid $mediumGrey;
+      .sub-title {
+        color: #333333;
+      }
+    }
+  }
+}
