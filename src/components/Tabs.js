@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {formatToDollars} from '../utils/utils';
+import {formatToDollars, getOpenRecords} from '../utils/utils';
+import orderBy from 'lodash/orderBy';
+
 
 /**
  * Tabs (button lists)
@@ -9,9 +11,12 @@ import {formatToDollars} from '../utils/utils';
  * @constructor
  */
 const Tabs = (props) =>{
+
+	const tabItems = orderBy(getOpenRecords(props.tabItems), ['id'], ['desc']);
+
 	return (
 		<ul className={`tabs ${props.tabWrapperClassName}`}>
-			{props.tabItems.map((item) =>{
+			{tabItems.map((item) =>{
 				const isActiveItem = props.activeItemId === item[props.identifier];
 				const listItemClasses = `${props.tabItemClassName} ${(isActiveItem) ? 'active' : ''}`;
 				const buttonClasses = `btn-link ${(isActiveItem) ? 'active' : ''}`;
@@ -37,7 +42,7 @@ Tabs.propTypes = {
 	tabWrapperClassName: PropTypes.string,
 	tabItemClassName:    PropTypes.string,
 	identifier:          PropTypes.string.isRequired,
-	activeItemId:        PropTypes.number,
+	activeItemId:        PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 	handleItemClick:     PropTypes.func,
 	itemTitleKey:        PropTypes.string,
 	itemSubTitleKey:     PropTypes.string
