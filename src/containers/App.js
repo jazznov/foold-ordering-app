@@ -5,6 +5,7 @@ import PurchaseMenu from '../components/PurchaseMenu.js';
 import {GetPurchaseRecord} from '../api/serverHelpers.js';
 import '../styles/App.css';
 import cloneDeep from 'lodash/cloneDeep';
+import {handleCreatePurchaseRecord} from '../actions/actions';
 
 class App extends Component {
 	constructor(){
@@ -12,9 +13,7 @@ class App extends Component {
 		this.handlePurchaseRecordTabClicked = this.handlePurchaseRecordTabClicked.bind(this);
 		this.handleNewNewRecordClicked = this.handleNewNewRecordClicked.bind(this);
 		this.state = {
-			activePurchaseRecordId: '',
-			purchaseRecords: [],
-			actionMode: ''
+			activePurchaseRecordId: ''
 		}
 	}
 
@@ -26,8 +25,13 @@ class App extends Component {
 			totalCost: 0,
 			status: 'new'
 		};
+		this.props.handleCreatePurchaseRecord(newPurchaseRecord);
 
-		this.setState({purchaseRecord: newPurchaseRecord});
+		// TODO Move out of local state
+		this.setState({
+			purchaseRecord:         newPurchaseRecord,
+			activePurchaseRecordId: newPurchaseRecord.id
+		});
 	}
 
 	/**
@@ -82,11 +86,17 @@ class App extends Component {
 
 const mapStateToProps = state => ({
 	foodMenuItems: state.foodMenuItems,
-	purchaseRecords: state.purchaseRecords,
+	purchaseRecords: state.purchaseRecords
 });
 
-/*const mapDispatchToProps = {
-	getCharactersFromAPI: offset => getCharactersFromAPI(offset),
-};*/
+const mapDispatchToProps = (dispatch) =>{
+	return {
+		handleCreatePurchaseRecord: (purchaseRecord) =>{
+			dispatch(handleCreatePurchaseRecord(purchaseRecord));
+		}
+	}
+};
 
-export default connect(mapStateToProps)(App);
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

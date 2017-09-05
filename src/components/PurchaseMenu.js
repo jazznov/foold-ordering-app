@@ -1,13 +1,15 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
 import {formatToDollars, matchMenuItemsToPurchaseItems} from '../utils/utils';
 import QuantityController from './QuantityController';
+import {
+	handleQuantityChange,
+	handleSavePurchaseRecord,
+	handleCancelRecord,
+	handleCloseRecord
+} from '../actions/actions';
 
-const onSubmit = function(event){
-	event.preventDefault();
-	console.log(event);
-};
-
-export default class OrderMenu extends Component {
+class PurchaseMenu extends Component {
 	// TODO Handle Read Only View?
 	showFoodMenuItems(){
 		const purchaseRecords = this.props.purchaseRecord;
@@ -17,14 +19,13 @@ export default class OrderMenu extends Component {
 				foodMenuItem:        item,
 				purchaseRecordItems: purchaseRecords.items
 			});
-			let itemQuantity = (matchedPurchasedItem && matchedPurchasedItem.quantity) ? matchedPurchasedItem.quantity : 0;
+			let quantity = (matchedPurchasedItem && matchedPurchasedItem.quantity) ? matchedPurchasedItem.quantity : 0;
 			return (
 				<li key={index}>
 					<h5>{item.title}</h5>
 					<ul>
-						<li>Quantity: {itemQuantity}</li>
 						{this.props.purchaseRecord.status === 'new' || this.props.purchaseRecord.status === 'open' ?
-							<QuantityController quantity={itemQuantity} id={item.id}/>
+							<QuantityController onQuantityChange={this.props.onQuantityChange} {...item} quantity={quantity} parentRecordId={this.props.purchaseRecord.id}/>
 							: null}
 
 						<li>Unit Cost: {formatToDollars(item.unitCost)}</li>
@@ -40,21 +41,23 @@ export default class OrderMenu extends Component {
 		const totalConst = formatToDollars(this.props.purchaseRecord.totalCost);
 		return (
 			<section className="purchase-record-content">
-				<form onSubmit={onSubmit}>
+				<form>
 					<h4>Purchase Record ID: {this.props.purchaseRecord.id}</h4>
+					<p>Status: {this.props.purchaseRecord.status.toUpperCase()}</p>
 					<p>Total Cost: {totalConst}</p>
 					<ul>
 						{this.showFoodMenuItems()}
 					</ul>
 
 					{this.props.purchaseRecord.status === 'new' ?
-						<button type='submit'>Create Order</button>
+						<button onClick={this.props.onCreatePurchaseOrder} type='button'>Create Order</button>
 						: null}
 
 					{this.props.purchaseRecord.status === 'open' ?
 						<div>
-							<button type='button'>Cancel Order</button>
-							<button type='submit'>Close Order</button>
+							<button onClick={this.props.onSavePurchaseOrder} type='button'>Save Order</button>
+							<button onClick={this.props.onCancelOrderClicked} type='button'>Cancel Order</button>
+							<button onClick={this.props.onCloseOrderClicked} type='button'>Close Order</button>
 						</div>
 						: null}
 				</form>
@@ -62,3 +65,36 @@ export default class OrderMenu extends Component {
 		);
 	}
 };
+
+const mapStateToProps = state => ({});
+
+const mapDispatchToProps = (dispatch, ownProps) =>{
+	const purchaseRecordId = ownProps.purchaseRecord.id;
+	return {
+		onQuantityChange:      ({id, unitCost, quantity}) =>{
+			dispatch(handleQuantityChange({
+					id:   purchaseRecordId,
+					item: {
+						id: id,
+						quantity,
+						unitCost
+					}
+				})
+			)
+		},
+		onCreatePurchaseOrder: () =>{
+			dispatch(handleSavePurchaseRecord(purchaseRecordId));
+		},
+		onSavePurchaseOrder:   () =>{
+			dispatch(handleSavePurchaseRecord(purchaseRecordId));
+		},
+		onCancelOrderClicked:  () =>{
+			dispatch(handleCancelRecord(purchaseRecordId));
+		},
+		onCloseOrderClicked:   () =>{
+			dispatch(handleCloseRecord(purchaseRecordId));
+		}
+	}
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(PurchaseMenu);
