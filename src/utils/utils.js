@@ -1,4 +1,6 @@
 import isNumber from 'lodash/isNumber';
+import find from 'lodash/find';
+
 
 export const formatToDollars = (value = console.error('Value undefined passed to formatToDollars')) =>{
 
@@ -14,4 +16,10 @@ export const formatToDollars = (value = console.error('Value undefined passed to
 		case false:
 			return format(parseInt(value));
 	}
+};
+
+export const matchMenuItemsToPurchaseItems = ({foodMenuItem, purchaseRecordItems}) =>{
+	return find(purchaseRecordItems, (recordItem) =>{
+		return recordItem.id === foodMenuItem.id
+	});
 };

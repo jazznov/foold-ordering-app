@@ -46,6 +46,7 @@ export const GetPurchaseRecord = ({items, id}) =>{
 			{
 				id:        purchaseRecord.id,
 				totalCost: purchaseRecord.totalCost,
+				status:        purchaseRecord.status,
 				items:     purchaseRecord.items
 			}
 		);
@@ -60,10 +61,3 @@ export const FetchAllPurchaseRecords = () =>{
 	});
 };
 
-/**
- * Interface for getting both the available food items to order and the open purchase record tabs, making sure both are done before setting state in App.js to reduce unnecessary re-renders
- * @returns {Promise.<*[]>}
- */
-export const getPageData = () =>{
-	return Promise.all([FetchFoodMenuItems(), FetchAllPurchaseRecords()]);
-};
