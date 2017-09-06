@@ -1,6 +1,5 @@
 import * as actionTypes from '../constants/actionTypes';
 import {addTotals} from '../utils/utils';
-import remove from 'lodash/remove';
 import find from 'lodash/find';
 
 const purchaseRecord = (state = {}, action) =>{
@@ -52,6 +51,16 @@ const purchaseRecord = (state = {}, action) =>{
 					status: 'closed'
 				}
 			}
+		case actionTypes.CANCEL_PURCHASE_RECORD:
+			if(state.id !== action.payload.id){
+				return state;
+			}
+			else {
+				return {
+					...state,
+					status: 'cancelled'
+				}
+			}
 		case actionTypes.SAVE_PURCHASE_RECORD:
 			if(state.id !== action.payload.id){
 				return state;
@@ -81,9 +90,9 @@ const purchaseRecords = (state = [], action) =>{
 				purchaseRecord(record, action)
 			);
 		case actionTypes.CANCEL_PURCHASE_RECORD:
-			return remove(state, (record) => {
-				return record.id === action.payload.id
-			});
+			return state.map(record =>
+				purchaseRecord(record, action)
+			);
 		case actionTypes.CLOSE_PURCHASE_RECORD:
 			return state.map(record =>
 				purchaseRecord(record, action)
