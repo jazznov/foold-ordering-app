@@ -39,7 +39,7 @@ const purchaseRecord = (state = {}, action) =>{
 			return {
 				...state,
 				items: newItems,
-				totalCost: addTotals({items:newItems, key: 'unitCost'})
+				totalCost: addTotals({items:newItems, key: 'unitCost', multiplier: 'quantity'})
 			};
 		case actionTypes.CLOSE_PURCHASE_RECORD:
 			if(state.id !== action.payload.id){
